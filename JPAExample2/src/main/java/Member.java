@@ -17,4 +17,8 @@ public class Member extends BaseEntity{
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private Team team;
 }
