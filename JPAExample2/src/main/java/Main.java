@@ -2,6 +2,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class Main {
 
@@ -13,16 +14,16 @@ public class Main {
         tx.begin(); // Transaction 시
 
         try{
-
-            Child child1 = new Child();
-            Child child2 = new Child();
-
-            Parent parent = new Parent();
-            child1.setParent(parent);
-            child2.setParent(parent);
-            parent.getChildren().add(child1);
-            parent.getChildren().add(child2);
-            em.persist(parent);
+//            Member member = new Member();
+//            member.setName("roach");
+//            member.getAddressesList().add(new Address("city", "street", "zipcode"));
+//            member.getAddressesList().add(new Address("Seoul", "YeongdeungPo", "100"));
+//            em.persist(member);
+            Member member = em.find(Member.class, 12L);
+            List<Address> addressesList = member.getAddressesList();
+            for(Address addr : addressesList){
+                System.out.println(addr.getCity());
+            }
             tx.commit();
         }catch (Exception e){
             tx.rollback();
